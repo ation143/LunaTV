@@ -220,7 +220,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
             {/* 弹窗 */}
             {isPopupVisible && (
               <div 
-                className='fixed top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[120px] bg-gray-200 border border-green-500 shadow-lg p-2 z-50'
+                className='fixed top-1/10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[120px] bg-gray-200 border border-green-500 shadow-lg p-2 z-50'
               >
                 <p className='text-yellow-500 text-left'>安卓APP</p>
                 <p><a href="https://ation143.lanzouu.com/ixAS83bm4hdg" target="_blank" rel="noopener noreferrer" className='text-red-500 text-center block'>
