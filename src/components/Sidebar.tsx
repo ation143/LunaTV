@@ -1,3 +1,4 @@
+在你的代码中插入一个标签，点击后弹出一个120x60的弹窗，弹窗中包含文字介绍和一个带下载链接的按钮。以下是修改后的代码示例：
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client';
@@ -46,48 +47,6 @@ interface SidebarProps {
   activePath?: string;
 }
 
-const App: React.FC = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const handleLabelClick = () => {
-    setIsPopupOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsPopupOpen(false);
-  };
-
-  return (
-    <div>
-      <label onClick={handleLabelClick} style={{ cursor: 'pointer' }}>
-        安卓客户端下载
-      </label>
-      
-      {isPopupOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            width: '120px',
-            height: '60px',
-            border: '1px solid #000',
-            backgroundColor: '#fff',
-            padding: '10px',
-            boxShadow: '2px 2px 5px rgba(0,0,0,0.5)',
-          }}
-        >
-          <p>下载安卓客户端</p>
-          <a href="https://ation143.lanzouu.com/ixAS83bm4hdg" download>
-            蓝奏云网盘下载
-          </a>
-          <button onClick={handleClosePopup} style={{ marginLeft: '5px' }}>
-            关闭
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
-
 // 在浏览器环境下通过全局变量缓存折叠状态，避免组件重新挂载时出现初始值闪烁
 declare global {
   interface Window {
@@ -99,7 +58,6 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  // 若同一次 SPA 会话中已经读取过折叠状态，则直接复用，避免闪烁
   const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
     if (
       typeof window !== 'undefined' &&
@@ -134,11 +92,9 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
   const [active, setActive] = useState(activePath);
 
   useEffect(() => {
-    // 优先使用传入的 activePath
     if (activePath) {
       setActive(activePath);
     } else {
-      // 否则使用当前路径
       const getCurrentFullPath = () => {
         const queryString = searchParams.toString();
         return queryString ? `${pathname}?${queryString}` : pathname;
@@ -192,12 +148,6 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       label: '直播',
       href: '/live',
     },
-    {
-      icon: Cat,
-      label: '安卓客户端',
-      href: 'https://github.com/MoonTechLab/Selene/releases',
-      target='_blank',
-    },
   ]);
 
   useEffect(() => {
@@ -214,9 +164,21 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
     }
   }, []);
 
+  // 弹窗相关状态
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  // 显示弹窗
+  const showPopup = () => {
+    setPopupVisible(true);
+  };
+
+  // 隐藏弹窗
+  const hidePopup = () => {
+    setPopupVisible(false);
+  };
+
   return (
     <SidebarContext.Provider value={contextValue}>
-      {/* 在移动端隐藏侧边栏 */}
       <div className='hidden md:flex'>
         <aside
           data-sidebar
@@ -228,7 +190,6 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
           }}
         >
           <div className='flex h-full flex-col'>
-            {/* 顶部 Logo 区域 */}
             <div className='relative h-16'>
               <div
                 className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${isCollapsed ? 'opacity-0' : 'opacity-100'
@@ -247,7 +208,31 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
               </button>
             </div>
 
-            {/* 首页和搜索导航 */}
+            {/* 新增标签 */}
+            <div className='px-2 mt-4'>
+              <label 
+                onClick={showPopup} 
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+              >
+                安卓客户端
+              </label>
+            </div>
+
+            {/* 弹窗 */}
+            {isPopupVisible && (
+              <div 
+                className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-30 h-15 bg-white border border-gray-300 shadow-lg p-2 z-50'
+              >
+                <p>使用安卓APP，观影更流畅，还有更多惊喜哦。</p>
+                <a href="https://example.com/download" target="_blank" rel="noopener noreferrer">
+                  点击下载
+                </a>
+                <button onClick={hidePopup} style={{ display: 'block', marginTop: '10px' }}>
+                  关闭
+                </button>
+              </div>
+            )}
+
             <nav className='px-2 mt-4 space-y-1'>
               <Link
                 href='/'
@@ -291,13 +276,9 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
             <div className='flex-1 overflow-y-auto px-2 pt-4'>
               <div className='space-y-1'>
                 {menuItems.map((item) => {
-                  // 检查当前路径是否匹配这个菜单项
                   const typeMatch = item.href.match(/type=([^&]+)/)?.[1];
-
-                  // 解码URL以进行正确的比较
                   const decodedActive = decodeURIComponent(active);
                   const decodedItemHref = decodeURIComponent(item.href);
-
                   const isActive =
                     decodedActive === decodedItemHref ||
                     (decodedActive.startsWith('/douban') &&
