@@ -153,7 +153,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
     {
       icon: Cat,
       label: '安卓客户端',
-      href: '/https://github.com/MoonTechLab/Selene/releases/download/v1.6.6/selene-1.6.6-armv8.apk',
+      href: '/downapp',
     },
   ]);
 
