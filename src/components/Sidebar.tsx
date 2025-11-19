@@ -211,9 +211,9 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
             <div className='px-2 mt-4'>
               <label 
                 onClick={showPopup} 
-                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                style={{ cursor: 'pointer', color: 'green', textDecoration: 'none' }}
               >
-                安卓客户端
+               【 安卓客户端下载】
               </label>
             </div>
 
@@ -222,10 +222,13 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
               <div 
                 className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-30 h-15 bg-white border border-gray-300 shadow-lg p-2 z-50'
               >
-                <p>使用安卓APP，观影更流畅，还有更多惊喜哦。</p>
-                <a href="https://example.com/download" target="_blank" rel="noopener noreferrer">
-                  点击下载
-                </a>
+                <p>安卓APP</p>
+                <p><a href="https://ation143.lanzouu.com/ixAS83bm4hdg" target="_blank" rel="noopener noreferrer">
+                  》》点击从蓝奏云下载《《
+                </a></p>
+                <p><a href="https://github.com/MoonTechLab/Selene/releases" target="_blank" rel="noopener noreferrer">
+                  》》点击从Github仓库下载《《
+                </a></p>
                 <button onClick={hidePopup} style={{ display: 'block', marginTop: '10px' }}>
                   关闭
                 </button>
