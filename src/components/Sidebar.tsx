@@ -153,7 +153,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
     {
       icon: Cat,
       label: '安卓客户端',
-      href: '/downapp',
+      href: 'https://github.com/MoonTechLab/Selene/releases',
     },
   ]);
 
