@@ -229,8 +229,8 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
 				<p><a href="https://github.com/MoonTechLab/Selene/releases" target="_blank" rel="noopener noreferrer" className='text-red-500 text-center block'>
                   》》从GitHub下载《《
                 </a></p>
-                <button onClick={hidePopup} style={{ display: 'block', color: 'red',text: 'right', marginTop: '10px' }}>
-                  关闭
+                <button onClick={hidePopup} style={{ display: 'block', marginTop: '10px' }}>
+                  <p className='text-red-500 text-right'>关闭</p>
                 </button>
               </div>
             )}
