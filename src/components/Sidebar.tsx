@@ -213,21 +213,21 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                 onClick={showPopup} 
                 style={{ cursor: 'pointer', color: 'green', textDecoration: 'none' }}
               >
-               【 安卓客户端下载】
+                【安卓客户端下载】
               </label>
             </div>
 
             {/* 弹窗 */}
             {isPopupVisible && (
               <div 
-                className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-30 h-15 bg-white border border-gray-300 shadow-lg p-2 z-50'
+                className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[120px] bg-gray-200 border border-green-500 shadow-lg p-2 z-50'
               >
-                <p>安卓APP</p>
-                <p><a href="https://ation143.lanzouu.com/ixAS83bm4hdg" target="_blank" rel="noopener noreferrer">
-                  》》点击从蓝奏云下载《《
+                <p className='text-yellow-500 text-left'>安卓APP</p>
+                <p><a href="https://ation143.lanzouu.com/ixAS83bm4hdg" target="_blank" rel="noopener noreferrer" className='text-red-500 text-center block'>
+                  》》从蓝奏云下载《《
                 </a></p>
-                <p><a href="https://github.com/MoonTechLab/Selene/releases" target="_blank" rel="noopener noreferrer">
-                  》》点击从Github仓库下载《《
+				<p><a href="https://github.com/MoonTechLab/Selene/releases" target="_blank" rel="noopener noreferrer" className='text-red-500 text-center block'>
+                  》》从GitHub下载《《
                 </a></p>
                 <button onClick={hidePopup} style={{ display: 'block', marginTop: '10px' }}>
                   关闭
