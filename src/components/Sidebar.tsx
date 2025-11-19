@@ -1,4 +1,3 @@
-在你的代码中插入一个标签，点击后弹出一个120x60的弹窗，弹窗中包含文字介绍和一个带下载链接的按钮。以下是修改后的代码示例：
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client';
