@@ -46,6 +46,48 @@ interface SidebarProps {
   activePath?: string;
 }
 
+const App: React.FC = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleLabelClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  return (
+    <div>
+      <label onClick={handleLabelClick} style={{ cursor: 'pointer' }}>
+        安卓客户端下载
+      </label>
+      
+      {isPopupOpen && (
+        <div
+          style={{
+            position: 'absolute',
+            width: '120px',
+            height: '60px',
+            border: '1px solid #000',
+            backgroundColor: '#fff',
+            padding: '10px',
+            boxShadow: '2px 2px 5px rgba(0,0,0,0.5)',
+          }}
+        >
+          <p>下载安卓客户端</p>
+          <a href="https://ation143.lanzouu.com/ixAS83bm4hdg" download>
+            蓝奏云网盘下载
+          </a>
+          <button onClick={handleClosePopup} style={{ marginLeft: '5px' }}>
+            关闭
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // 在浏览器环境下通过全局变量缓存折叠状态，避免组件重新挂载时出现初始值闪烁
 declare global {
   interface Window {
@@ -154,6 +196,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       icon: Cat,
       label: '安卓客户端',
       href: 'https://github.com/MoonTechLab/Selene/releases',
+      target='_blank',
     },
   ]);
 
